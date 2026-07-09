@@ -34,3 +34,6 @@ dist/
 # Temporary files
 temp/
 tmp/
+# Dataset
+data/extracted_dataset/
+*.csv
