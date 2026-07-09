@@ -1,0 +1,645 @@
+
+
+
+
+School of Computer Science Engineering & Information Systems Department of Information Technology
+
+
+
+Fake News Credibility Assessment
+
+using Fuzzy Logic
+
+
+
+
+Soft Computing, BITE405L
+
+
+
+
+Lavisha  (23BIT0392), 
+Ansh Sabharwal (23BIT0212)
+
+
+
+
+Under the guidance of: Dr. B. K. Tripathy, professor (HAG), SCORE, VIT, Vellore
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	•	Abstract
+
+
+Misinformation spreading online has made it really hard to tell whats real and whats not. So this project is basically a system that checks how credible a news article is, using fuzzy logic and machine learning together. Most existing tools just give a yes or no answer, this one tries to handle the grey areas better.
+
+The system takes input in different formats like plain text, urls, images and pdfs which makes it more useful in real situations since news doesnt always come in one form. Once the content is extracted it goes through language detection and translation, then gets cleaned up. After that the system looks at things like emotional tone, objectivity, source reliability, clickbait chances, content length and repetition.
+
+Ml models handle parts like detecting clickbait and checking writing style, while a fuzzy inference system (mamdani type) brings all the features together to give a final credibility score. This setup lets the system deal with uncertainty instead of making hard yes/no calls, kinda how a person would reason through it. The result also comes with an explanation of what factors affected the score so its not just a black box.
+
+Overall this shows that combining fuzzy logic with ml gives a more flexible and explainable way to detect fake news. Looking at multiple factors instead of just one metric makes it more reliable and actually useful for someone trying to figure out if a piece of content is trustworthy.
+
+
+
+
+	•	Aim and Objective
+
+
+Aim
+
+The aim is to design and develop a system that checks how credible a news article is by combining fuzzy logic with ml. The system looks at multiple aspects like language patterns, emotional tone and source reliability to give a more realistic credibility score. Instead of labeling news as just real or fake, the idea is to handle the uncertainty that comes with human judgment and give a more detailed evaluation.
+
+
+Objectives
+
+The main objective is to build a system that can take news input in different formats like raw text, urls, images and pdfs so it works in real situations. another objective is to preprocess the input by detecting language, translating if needed and cleaning the text before any analysis.
+The project also aims to pull out useful features from the content like emotional intensity, objectivity, repetition and clickbait likelihood. ML models are used to help detect writing style and sensational content. all these features are then fed into a mamdani fuzzy inference system which gives a credibility score that reflects different levels of trustworthiness rather than a fixed label.
+The system is also meant to explain its decisions so users can understand why something is flagged as credible or not. this makes it more transparent and practical. Overall the objective is to build something that is flexible, explainable and goes beyond the usual binary fake/real classification.
+
+
+
+
+
+	•	Hardware and Software requirements
+
+
+Hardware Requirements
+
+The system doesnt need any special or high end hardware, so it can run on a regular pc or laptop. An intel i5 or equivalent processor is recommended to handle things like text processing, ocr and model inference without issues.
+At least 8gb ram is preferred since the app runs multiple things at once like ml inference, fuzzy computation and the streamlit interface. Lower ram systems can still run it but might slow down when dealing with large files or images.
+Around 5 to 10gb of free disk space is enough to store datasets, trained models and libraries. No dedicated gpu is needed since the project uses lightweight ml models, not deep learning ones.
+
+
+Software Requirements
+
+The project is built in python since it has a solid ecosystem for ml, nlp and data handling. The interface is made using streamlit which lets it run as a web app without needing any complex frontend work.
+For nlp, textblob, nltk and vader are used to extract emotional tone and objectivity from text. ML models are built with scikit-learn mainly for clickbait detection and formality assessment. Fuzzy logic is handled by scikit-fuzzy which manages membership functions and rule based inference for the credibility score.
+pytesseract and pillow take care of ocr from images, pdfplumber extracts text from pdfs, and langdetect along with deep-translator handle language detection and translation for multilingual input. Plotly is used for visualizing credibility scores and feature breakdowns in an interactive way.
+The project runs on windows, macos or linux. using a virtual environment is recommended and all dependencies can be installed from the requirements file.
+
+
+
+	•	Literature Review
+
+S No
+Title of paper and year
+Algorithm used
+Dataset used
+Performance measures
+Future works
+1
+A Novel Fuzzy Logic-Based Hybrid Framework for Detecting Fake News (2026)
+Hybrid model combining LSTM (text analysis), GNN + Transformer (image analysis), and Fuzzy Logic decision system (Trustify framework)
+Twitter, BuzzFeed, PolitiFact datasets
+Accuracy, Precision, Recall, F1-score (model outperformed existing methods across all metrics)
+Future improvements include enhancing multimodal integration, extending the model to support multilingual datasets, and refining fuzzy rules to better handle language-specific variations and improve generalization
+
+2
+Fake News Detection using Hybrid Deep Learning and Contextual Analysis (2023)
+Deep learning-based approach using transformer models (context-aware NLP) along with graph/contextual analysis techniques
+Social media datasets including news articles and user interaction data (multi-source datasets)
+
+Accuracy, Precision, Recall, F1-score (improved performance due to contextual understanding of news content and propagation patterns)
+Focuses on improving real-time detection, integrating multimodal data (text, images, social signals), and enhancing explainability of deep learning models to make decisions more transparent
+3
+Using Fuzzy Transform for Sustainable Fake News Detection (2024)
+Hybrid approach using Fuzzy Transform (F-transform) for data reduction and LSTM (Long Short-Term Memory) for classification
+Five publicly available fake news datasets (multi-dataset evaluation)
+Accuracy, F1-score, Training Time, Energy Consumption (achieved similar accuracy with only 1–3% variation while reducing energy usage by over 50%)
+Includes improving compression techniques without loss of information, extending the model to multimodal data (text + images), and enhancing efficiency for large-scale real-time applications
+
+4
+Fake News Detection using Machine Learning and Deep Learning Techniques (2024)
+Comparative approach using Machine Learning (SVM, Random Forest, Naïve Bayes) and Deep Learning models (LSTM, CNN) with TF-IDF feature extraction
+Multiple benchmark datasets (including social media news datasets and labeled fake/real news corpora)
+Accuracy, Precision, Recall, F1-score (Random Forest and TF-IDF based models showed high accuracy, around 98% in some cases)
+Includes improving model generalization across different domains, incorporating real-time detection systems, and integrating multimodal data such as images and user behavior for better prediction
+5
+Fake News Classification Using a Fuzzy Convolutional Recurrent Neural Network (2022)
+Hybrid deep learning model combining Convolutional Recurrent Neural Network (CRNN) for feature extraction with Fuzzy Logic-based classification
+LIAR, LIAR-PLUS, and ISOT datasets
+Accuracy, Precision, Recall (achieved very high accuracy, up to ~99.99% on ISOT dataset)
+Includes improving generalization across diverse datasets, incorporating additional contextual and multimodal features, and refining fuzzy integration for better real-world adaptability
+
+6
+Fake News Detection Using Deep Neuro-Fuzzy Network (2024)
+Hybrid model combining Fuzzy Neural Network with Positional Self-Attention Mechanism (deep learning)
+Two benchmark fake news datasets (text-based datasets used for evaluation)
+Accuracy (improved by more than 15% compared to traditional methods), robustness and classification performance
+Future work includes optimizing model architecture, improving interpretability, incorporating multimodal data (text, image, video), and enabling real-time adaptive learning for evolving fake news patterns
+7
+An Enhanced Fake News Detection System with Fuzzy Deep Learning (2025)
+Hybrid model combining Deep Learning (language models / neural networks) with Fuzzy Logic-based decision system
+LIAR dataset and extended LIAR2 dataset
+Accuracy, Precision, Recall, F1-score (achieved around 99% accuracy, showing strong performance over baseline models)
+Future work includes improving dataset diversity, extending the system for real-time detection, enhancing multilingual support, and refining fuzzy reasoning to better handle uncertainty in complex news content
+
+
+
+
+
+	•	Gaps Identified
+
+
+
+Most existing fake news detection systems depend heavily on deep learning to get good accuracy. These models work well in research settings but need large datasets, a lot of compute power and complex setups, which makes them hard to use in lightweight or real time applications. Theres a clear gap between what gets published in research and what actually works in practice.
+Interpretability is another big issue. Deep learning models mostly work as black boxes, they give a result but dont explain why. In fake news detection this is a real problem because users need to trust the system. some works try to add explainability but its usually limited and not built into the core logic.
+
+A lot of existing work also only looks at text and ignores the fact that fake news shows up in images, pdfs and web pages too. Multimodal approaches do exist but they are usually complex and resource heavy, which limits how usable they actually are.
+Language diversity is another gap. Most models are trained for english and dont perform as well on other languages. this is a problem in regions where people consume news in multiple languages.
+Theres also a tendency in research to focus only on accuracy and ignore things like efficiency, scalability and how well the model holds up as misinformation evolves. fake news changes over time and static models can go stale.
+
+
+Fuzzy logic has been explored to handle uncertainty but its combination with ml is still not well optimised. Most hybrid models chase accuracy without balancing it with interpretability or real time usability.
+So the gap basically comes down to this, there isnt a system that is accurate, explainable, efficient, multimodal and multilingual all at once. thats what this project tries to address.
+
+
+
+
+	•	Problem framed
+
+
+Digital media and social platforms have made information easy to access but also made it way easier for fake news to spread. Misleading content can go viral fast and affect public opinion or cause real harm. The problem isnt just detecting it but doing it in a way thats accurate, efficient and accounts for the fact that credibility isnt always black and white.
+
+Most existing systems use ML or deep learning and focus mainly on classification accuracy. They label content as real or fake and thats it. But thats not really how it works in practice, credibility usually sits somewhere on a spectrum and a hard yes/no doesnt capture that.
+Interpretability is also a problem. Most models just give a prediction with no explanation, which makes it hard for users to trust the output. On top of that many of these systems are resource heavy and not built for real time or lightweight use, so they dont work well outside of research setups.
+Most systems also only handle text. They cant process images, pdfs or urls which limits how useful they are since news comes in all formats. Multilingual support is another thing thats usually missing, which makes these tools less useful in places where people consume content in more than one language.
+
+So the core problem this project is addressing is building a credibility assessment system that is more flexible and explainable. It should handle multiple input formats, support different languages, and give a graded credibility score instead of a fixed label. It also needs to stay efficient and provide clear reasoning behind its decisions so its actually useful in the real world.
+
+
+
+
+	•	Solution proposed
+
+
+To fix the problems with existing fake news detection approaches, this project proposes a hybrid system that combines ML with fuzzy logic. The goal is to move away from rigid classification and build something that handles uncertainty more like how a person would reason through it.
+
+The system takes input in multiple formats, raw text, urls, images and pdfs. For images and pdfs, text is pulled out using ocr and document parsing so everything gets processed the same way regardless of format. Web content is also handled through structured extraction from pages.
+
+
+
+After extraction the system detects the language and translates to english if needed, so multilingual content can be handled without needing separate models for each language. The text is then cleaned up to remove noise like symbols, stray urls and formatting issues before any analysis happens.
+The main part of the system is feature extraction. It looks at things like emotional intensity, objectivity, source reliability, clickbait likelihood, content length and repetition. ML models are used to estimate features like clickbait probability and writing formality, adding a data driven layer on top of the rule based analysis.
+
+All these features go into a mamdani fuzzy inference system which evaluates credibility based on a set of predefined rules. Instead of a binary output it gives a score on a continuous scale which allows for more nuanced results. The fuzzy system handles ambiguous cases better because it considers multiple factors at the same time.
+The output includes a credibility score, a label showing the level of trustworthiness, and an explanation of what factors influenced the result. Everything is shown through an interactive interface built with streamlit.
+Overall the system tries to balance accuracy, explainability and efficiency. Combining ml with fuzzy logic and supporting multiple input formats makes it a practical and flexible approach to assessing news credibility.
+
+
+
+	•	Architecture
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Figure 8.1
+
+The system is built as a modular pipeline where each component handles one specific stage of the process. The stages go in order, input, language processing, preprocessing, feature extraction, fuzzy inference and output. each layer feeds into the next and they all work independently which makes the system easier to maintain or modify without breaking everything else.
+
+First layer is the input module. It accepts four types of input, raw text, urls, images and pdfs. Since news content shows up in all these formats in the real world, supporting all of them makes the system actually usable. For urls it uses web scraping to pull the article content, for images it runs ocr to extract any text present, and for pdfs it uses document parsing to get the written content out. Regardless of the input type everything ends up as plain text before moving to the next stage.
+
+Once the text is ready it goes into the language processing layer. Here the system first detects what language the content is in. If its not in english it gets translated automatically. This means the system can handle multilingual news without needing separate models trained on different languages, which keeps things simple and efficient.
+After translation the text moves to preprocessing. This step cleans up the raw text by removing things like leftover urls, extra whitespace, special characters and formatting noise. The goal is to get a normalized and consistent version of the text that the feature extraction module can work with properly.
+
+Feature extraction is where the actual content analysis happens and its one of the more important parts of the pipeline. The system computes several features from the cleaned text. Emotional intensity measures how charged or neutral the language is. Objectivity looks at whether the writing is factual or opinion based. repetition checks if certain phrases or ideas are being pushed repeatedly which is a common pattern in misleading content. Content length is also factored in since credible articles tend to follow certain length patterns. Source reliability tries to assess how trustworthy the origin of the content is. Clickbait probability is estimated using a trained ml model that looks at headline and writing patterns. writing formality is another ML derived feature that checks whether the language matches the style of legitimate news. Combining NLP based features with ml model outputs gives the system a richer understanding of the content.
+
+All these features then get passed into the fuzzy inference engine which is the core decision making component. a mamdani type fuzzy logic system is used here. It takes the extracted features as inputs, applies a set of predefined rules and uses membership functions to evaluate how much each feature contributes to credibility or lack of it. The key advantage here is that instead of giving a hard real or fake label, it produces a credibility score on a continuous scale. This reflects the fact that trustworthiness isnt binary, some content is clearly reliable, some is clearly not, and a lot falls somewhere in between. The fuzzy system handles that middle ground better than a standard classifier would.
+
+The last layer is output and visualization. the credibility score from the fuzzy system is mapped to a qualitative label, something like low, moderate or high credibility. Alongside the score the system also displays an explanation that breaks down which features had the most influence on the result. This transparency is important because it helps users understand the reasoning rather than just accepting a number. The results are shown through an interactive streamlit interface with charts and visual indicators that make everything easy to read and interpret.
+Overall the architecture is designed to be modular, scalable and practical. each component does its job independently but they all connect into one clean workflow that can handle diverse inputs and deliver results that are both meaningful and explainable.
+
+
+	•	Detailed Description of the Modules
+
+
+The system is built as a sequence of connected modules where each one does a specific job in turning raw input into a credibility assessment. Instead of just classifying content, it processes things step by step, pulling out more information at each stage before making a final call. Keeping it modular also makes it easier to update or fix individual parts without affecting the rest.
+
+1. Input Acquisition Module
+
+This is the first point of contact with the system. It handles four types of input, raw text, urls, images and pdfs.
+Raw text goes straight into the pipeline without any extra steps. For urls the system scrapes the article content and filters out things like ads and navigation elements. It also picks up metadata like the title, author and domain name which come in useful later during credibility analysis. For images the module runs ocr to extract any text in them. Before ocr is applied the image gets preprocessed, converted to grayscale and contrast enhanced, to improve how accurately the text gets detected. For pdfs the system goes through each page and pulls out the readable text while ignoring non text elements.
+
+The main job of this module is to convert all input types into plain text so that every other module downstream can work with a consistent format.
+
+2. Language Detection and Translation Module
+
+Once the text is extracted the system figures out what language its in using probabilistic detection. If its not in english it gets translated automatically since the nlp techniques and ml models used later are built around english text.
+For longer documents the text is split into smaller chunks before translation and then joined back together. This avoids hitting api limits or getting incomplete translations. The original language is also saved as metadata so theres still a record of where the content came from.
+
+This module is what allows the system to handle multilingual content without needing separate pipelines for each language.
+
+3. Preprocessing Module
+
+This module cleans up the text before any analysis happens. Raw text usually has a lot of noise in it, urls, weird spacing, line breaks, special characters and other formatting issues that can mess with feature extraction if left in.
+The system converts everything to lowercase, strips out hyperlinks and extra whitespace, and normalizes line breaks into a clean continuous text. Its a straightforward step but it matters a lot because messy input leads to unreliable feature values down the line.
+
+
+
+
+
+
+
+
+4. Feature Extraction Module
+
+This is where the system starts actually understanding the content rather than just formatting it. Instead of relying on one signal it looks at several different aspects of the text at once.
+Emotional intensity is measured by looking at sentiment polarity and how strong it is. Fake or misleading content often uses exaggerated language to get a reaction so this is a useful signal. Objectivity is assessed separately to check whether the writing is more factual or opinion based.
+Repetition is also checked since content that keeps pushing the same words or phrases tends to be manipulative or spammy. Content length is factored in too since very short articles often lack enough substance to be reliable.
+
+Clickbait probability is estimated using a trained ml model that looks at how sensational or misleading the phrasing is. Source reliability combines domain reputation scores with an ML based check on writing formality to get a more complete picture of how trustworthy the source is.
+
+All features get normalized to a common scale so they can be compared and combined properly in the next stage.
+
+5. Fuzzy Inference Module
+
+This is the core decision making part of the system. Instead of giving a hard real or fake output a mamdani type fuzzy logic system is used to evaluate credibility in a more flexible way.
+Each feature value gets mapped to a linguistic category like low, medium or high using membership functions. This lets the system work with partial truths and uncertainty rather than forcing everything into fixed bins. For example a piece of content might not be outright fake but could still show some misleading patterns, the fuzzy system can reflect that.
+
+A set of predefined rules then determines how the features interact with each other. Content with high emotional intensity and strong clickbait signals gets pushed toward lower credibility. Content that is objective, well structured and from a reliable source gets pushed toward higher credibility. The system combines all the applicable rules and uses defuzzification to produce a final score on a scale of 0 to 100.
+
+This module is what bridges the gap between raw numbers and something that resembles human judgment.
+
+6. Output and Visualization Module
+
+The last module handles presenting the results in a way thats easy to understand. The credibility score gets mapped to a label like low, moderate or high so users dont have to interpret a raw number.
+
+Alongside the label the system shows an explanation of what drove the result, things like high emotional tone or clickbait patterns flagged during analysis. this transparency is important because it gives users a reason behind the score rather than just asking them to trust it.
+
+The results are displayed through the streamlit interface using gauges and charts. There is also a feature wise breakdown so users can see exactly how each aspect of the content contributed to the final assessment. The goal of this module is to make sure the system is not just accurate but actually usable and understandable for someone who isnt technical.
+
+	•	 Workflow Diagram
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Figure 10.1
+	•	 Language and Tools Used
+
+
+
+The entire project is built in python and thats really the foundation everything else sits on. Python was the natural choice here because of how mature its ecosystem is for nlp, ml and data processing. It also makes integrating different components a lot cleaner since most of the libraries used are designed to work well together. Writing everything in one language also means there are no compatibility issues between different parts of the system.
+
+Streamlit
+
+The user interface is built using streamlit. rather than building a separate frontend with html, css and javascript, streamlit lets you create an interactive web app directly from python code. For this project that means users can upload files, paste text or enter a url, trigger the analysis and see the results all in one clean interface without any extra development overhead. It also supports real time rendering which makes the experience feel responsive.
+
+TextBlob, NLTK and VADER
+
+Natural language processing is handled through a combination of three libraries. Textblob is used for general sentiment analysis and gives polarity and subjectivity scores that help assess how emotionally driven or opinion based the content is. Nltk provides lower level text processing tools like tokenization and stopword removal which are useful during preprocessing and feature extraction. Vader sentiment analyzer is used alongside these because it is specifically designed for social media and informal text, making it better at picking up on emotionally charged or exaggerated language that might not be caught as effectively by textblob alone. Using all three together gives a more complete picture of the linguistic characteristics of the content.
+
+Scikit-learn
+
+Machine learning tasks are handled using scikit-learn. The two main ML driven features in the system are clickbait detection and writing formality assessment. Both are implemented as logistic regression classifiers trained on labeled text data. tf-idf vectorization is used to convert raw text into numerical feature vectors that the models can work with. scikit-learn was chosen here because it is well optimised, easy to work with and the models it produces are lightweight enough to run in real time without needing a gpu or heavy compute resources.
+
+
+
+
+
+Scikit-fuzzy
+
+The fuzzy inference system is built using scikit-fuzzy. This library provides everything needed to define membership functions, set up linguistic variables and build a rule based inference system. In this project it is used to implement the mamdani type fuzzy logic model that takes all the extracted features as inputs and produces a credibility score as output. The ability to define custom rules and membership functions is what makes scikit-fuzzy suitable here since the credibility rules need to reflect domain specific reasoning about what makes news trustworthy or not.
+
+pytesseract and pdfplumber
+
+To support image and pdf inputs the system uses pytesseract for ocr and pdfplumber for document parsing. pytesseract is a wrapper around the tesseract ocr engine and is used to extract text from uploaded images. Before running ocr the image goes through some preprocessing like grayscale conversion and contrast adjustment to improve detection accuracy. pdfplumber is used to parse pdf files page by page and extract the readable text content while ignoring things like embedded images or decorative elements that arent relevant to the analysis.
+
+newspaper3k
+
+For url based input the system uses newspaper3k to handle web scraping. this library is built specifically for news article extraction and does a good job of pulling out the main article body while filtering out navigation menus, ads and other page clutter. It also retrieves metadata like the article title, author and publish date which contribute to the source reliability assessment.
+
+langdetect and deep-translator
+
+Language detection is handled by langdetect which uses probabilistic methods to identify what language a piece of text is written in. If the content is not in english deep-translator is used to translate it before any analysis happens. For longer texts the content is broken into chunks before translation and reassembled afterwards to avoid hitting length limits. This combination means the system can handle multilingual content without needing separate models or pipelines for different languages.
+
+Plotly
+
+Visualization is done using plotly which generates interactive charts and gauge indicators. The credibility score is displayed visually so users can get a quick read on the result without having to interpret raw numbers. Plotly also supports feature wise breakdowns shown as bar charts which let users see exactly how each factor like emotional tone, clickbait probability or source reliability contributed to the final score. The interactive nature of plotly charts fits well with the streamlit interface since users can hover over elements and explore the data more closely if they want.
+
+Overall the tool choices reflect a deliberate effort to keep things practical. Every library used is well established, well documented and serves a specific purpose in the pipeline. There was no need for heavy deep learning frameworks or complex infrastructure, the combination of these tools is enough to build something that is functional, explainable and efficient.
+
+
+
+
+
+
+
+
+
+
+
+
+	•	Procedure of the Project (Algorithms Used)
+
+
+The system follows a step by step process to assess how credible a piece of news is. Rather than using one model it combines text extraction, nlp, ml and fuzzy logic together to get to a final score.
+It starts with taking in the input. the user can provide raw text, a url, an image or a pdf. Depending on what type it is the system handles it differently, web scraping for urls, ocr for images and document parsing for pdfs. everything ends up as plain text before anything else happens.
+
+Next the system detects the language. If its not english it gets translated before moving forward. This keeps everything consistent across the pipeline and means the system can handle content in different languages without needing separate setups for each one.
+After that the text goes through preprocessing. Urls, extra spaces and formatting issues get stripped out and the text is cleaned up into a standardized form. This step matters because messy text leads to unreliable feature values later on.
+
+Then comes feature extraction. The system looks at several things at once. Emotional intensity is measured through sentiment analysis. Objectivity is assessed by checking how neutral or subjective the writing is. Repetition patterns are checked to catch anything that looks spammy or manipulative. Content length is also considered since very short articles tend to lack substance.
+
+On top of the nlp based features two ml models are used. A logistic regression model with tf-idf vectorization estimates clickbait probability by analyzing the language and phrasing of the content. Another model assesses writing formality which feeds into the source reliability score. Both models are trained on labeled data and give probabilistic outputs that get added to the feature set.
+
+Once all features are extracted and normalized they go into the fuzzy inference system. A mamdani type fuzzy logic model is used here. each feature gets mapped to a linguistic category like low, medium or high using membership functions. Predefined rules then determine how the features interact, for example content with high emotional intensity and strong clickbait signals gets pushed toward low credibility while content thats objective and from a reliable source gets pushed toward high credibility. The system combines all applicable rules and runs defuzzification to produce a final score on a continuous scale.
+The output is a credibility score along with a label like low, moderate or high. The system also shows an explanation of which factors influenced the result so users can actually understand why that score was given rather than just seeing a number.
+
+Overall the procedure brings together sentiment analysis, tf-idf vectorization, logistic regression and fuzzy inference into one pipeline that is both practical and explainable.
+
+
+
+
+
+
+
+
+
+
+
+	•	Dataset Description
+
+
+The system uses the ISOT Fake News Dataset which is one of the more well known datasets for fake news related tasks. It comes as two separate csv files, True.csv and Fake.csv, one containing verified news articles and the other containing fabricated or misleading ones. 
+Together they form a balanced dataset that works well for supervised learning.
+Each entry in the dataset has fields like the article title, main text content, subject category and publication date. For this project the title and text are combined into one unified input. Doing this captures both the headline level patterns and the deeper content of the article which gives the models more to work with.
+
+The articles in True.csv come from reliable sources and tend to be factual and neutral in tone. The ones in Fake.csv are the opposite, they usually have exaggerated language, emotional phrasing and clickbait style headlines. This contrast is what lets the ML models learn the patterns that separate credible content from misleading content.
+To keep training efficient without losing too much diversity a fixed subset is randomly sampled from both categories and then combined and shuffled before training. This reduces the compute needed while still making sure the data represents a good range of writing styles and content types.
+
+The dataset is mainly used to train the clickbait detection and formality analysis models. tf-idf vectorization is used to convert the text into numerical features and logistic regression is trained on those features to estimate probabilities for each input.
+
+One limitation worth noting is that the dataset only contains english language articles. The system handles this by translating non english input before analysis but translation can sometimes introduce small inconsistencies in meaning so thats something to keep in mind.
+Overall the dataset is a solid base for training because it covers a wide range of writing styles and has a realistic mix of real and fake content, which helps the models generalise reasonably well to new inputs.
+
+
+
+
+	•	Experimental Setup and Execution
+
+
+
+The system was built and tested on a standard personal computer with moderate specs, nothing high end. The idea was to keep the implementation lightweight and make sure it doesnt depend on any specialized hardware to run.
+The development environment was python based with all libraries installed inside a virtual environment to keep dependencies clean. The app runs on a local streamlit server which gives it an interactive web interface without needing any complex deployment setup. everything processes in real time and results show up immediately after input is submitted.
+
+
+Before running the main system the datasets were prepared and used to train the ML models for clickbait detection and formality analysis. The training involved combining text from real and fake news articles, converting it using tf-idf vectorization and fitting logistic regression models on the result. Once trained the models were saved so they dont need to be retrained every time the system runs.
+
+During testing the system was run with all four input types, manually typed text, news article urls, images with embedded text and pdf documents. Each input type triggered its own extraction method automatically so the system handled them without any manual switching.
+
+The extracted text then went through language detection, translation if needed, preprocessing and feature extraction. The features were passed to the fuzzy inference system which gave back a credibility score and a label. The results were shown through the streamlit interface with visual indicators and explanations of what drove the score.
+To get a proper sense of how the system behaves different kinds of content were tested. Clearly factual articles, obviously fake sensational ones and borderline cases that had mixed characteristics. This helped check whether the fuzzy logic model produces consistent and reasonable outputs across different credibility levels.
+Overall the setup showed that the system handles real time inputs well and stays interpretable throughout. The combination of ml and fuzzy logic keeps it practical without needing heavy compute resources.
+
+
+
+	•	Result Analysis
+
+
+The results show that the system can evaluate news credibility in a consistent and explainable way. Instead of giving a hard real or fake label it outputs a score on a continuous scale with a qualitative label alongside it. This works better in practice especially for content that doesnt clearly fall into one category.
+Testing was done across three types of content, clearly factual articles, obviously fake or sensational ones and ambiguous content that sits somewhere in between.
+
+For factual articles from reliable sources the system consistently gave high credibility scores. The main reasons were strong objectivity, low emotional intensity, minimal repetition and good source reliability. The fuzzy inference system picked up on these signals and assigned high credibility labels which matched what was expected.
+
+For fake or misleading content the scores came out significantly lower. Articles with exaggerated language, heavy emotional tone and clickbait phrasing got flagged by the feature extraction module. The ml model identified the clickbait patterns and the fuzzy system combined everything to pull the score down. This shows the system is picking up on the right signals.
+The more interesting cases were the ambiguous ones. Instead of forcing a binary call the system gave medium credibility scores for content that had some reliable characteristics mixed with some questionable ones. For example an article with decent objectivity but slight emotional bias or unclear source credibility ended up in the middle range. This is where fuzzy logic actually earns its place since a regular classifier would have just picked one side.
+
+
+
+Using multiple features together also made the results more stable. Relying on just one signal like sentiment or clickbait alone would make the system easy to fool. Combining emotional tone, objectivity, source reliability and structural patterns together makes the overall assessment more robust.
+The explainability side of things also worked well. Along with the score the system gives a breakdown of what influenced the result. This makes it easier for users to understand why a piece of content got a certain score rather than just having to trust a number.
+Overall the system performs reliably across different input types while staying interpretable and flexible. It wont match the raw accuracy of deep learning models but it offers a more balanced approach in terms of performance, efficiency and explainability which matters more for real world use.
+
+
+
+	•	Comparison with existing approaches
+
+Aspect
+Traditional ML Approaches
+Deep Learning Approaches
+Existing Hybrid (Fuzzy + DL) Systems
+Proposed System
+Core Technique
+Algorithms like SVM, Naïve Bayes, Logistic Regression
+Neural networks such as LSTM, CNN, BERT
+Combination of deep learning with fuzzy logic
+Machine Learning + Fuzzy Logic
+Decision Type
+Mostly binary (Real/Fake)
+Binary classification
+Semi-flexible (depends on fuzzy layer)
+Continuous credibility score (0–100) with labels
+Interpretability
+Moderate (feature-based)
+Low (black-box models)
+Limited (partially interpretable)
+High (clear reasoning via fuzzy rules)
+Computational Cost
+Low
+High (requires GPU in many cases)
+Very high (complex hybrid models)
+Low to moderate (runs on standard systems)
+Accuracy
+Moderate to high
+Very high
+Very high
+Moderate to high (balanced with explainability)
+Handling Uncertainty
+Poor (rigid classification)
+Limited
+Good (through fuzzy integration)
+Strong (core fuzzy reasoning system)
+Input Flexibility
+Mostly text-based
+Mostly text (some multimodal models exist)
+Some support multimodal data
+Supports text, URL, image, and PDF
+Multilingual Support
+Limited
+Limited (depends on training data)
+Rarely implemented
+Supported via translation mechanism
+Real-Time Usability
+High
+Moderate (depends on model size)
+Low (complex processing)
+High (lightweight and efficient)
+Explainability (XAI)
+Basic feature importance
+Very low
+Partial
+Built-in explanations with reasoning
+Scalability
+Good
+Requires high resources
+Complex to scale
+Easily scalable
+Practical Deployment
+Easy
+Difficult (resource heavy)
+Difficult
+Easy and cost-effective
+
+
+
+Table 16.1
+
+
+
+
+	•	Sample Code
+
+	•	Conclusion
+
+
+
+The system offers a practical and explainable way to assess how credible a piece of news is. Instead of just classifying content as real or fake it combines ML with fuzzy logic to handle the uncertainty that comes with real world information and gives a more graded result.
+One of the stronger aspects of the system is that it looks at multiple things at once, emotional tone, objectivity, source reliability, clickbait patterns and structural characteristics. this makes the evaluation more balanced compared to systems that rely on just one or two signals. The fuzzy logic component adds to this by handling ambiguous cases that a regular classifier would struggle with.
+Interpretability was also a priority throughout the project. Unlike deep learning models that just give a result with no explanation, this system tells the user what factors drove the score. That transparency matters a lot in a context like fake news detection where people need to understand why something is being flagged rather than just being told to trust the output.
+
+The system also handles multiple input formats, text, urls, images and pdfs, and supports multilingual content through language detection and translation. This makes it usable in more real world situations rather than being limited to one type of input or one language.
+It wont match the raw accuracy numbers of large deep learning models but thats not really what this project is going for. The goal was to build something that is efficient, explainable and runs on standard hardware without needing heavy compute resources. On those fronts the system delivers.
+Overall the project shows that combining fuzzy logic with ml is a viable approach for fake news detection, one that trades some accuracy for a lot more transparency and practicality. Designing systems that are not just accurate but also understandable and accessible is something that matters more as these tools move into real world use.
+
+
+
+
+
+
+	•	Scope for Future Work
+
+
+
+The system works well for what it currently does but there are several directions it can be taken further.Right now the system supports multiple input formats but the analysis is still mostly text based. A useful extension would be proper multimodal analysis where images, videos and metadata are all processed together rather than just extracting text from them. Misleading visual content is becoming more common in fake news so this would make the system more effective in practice.
+The ml side can also be improved. Logistic regression works fine for lightweight tasks like clickbait detection and formality analysis but moving to transformer based models could help the system better understand context and pick up on more subtle language patterns. The tradeoff between performance and compute cost would need to be managed carefully but its a worthwhile direction.
+
+The fuzzy rule base is currently designed manually which introduces some subjectivity. Future work could look into adaptive or learning based fuzzy systems where the rules and membership functions get optimised automatically from data instead of being set by hand. This would make the system more consistent and reduce the effort needed to tune it.
+Real time integration is another potential improvement. Currently the system only evaluates what the user submits. Extending it to monitor live news feeds or social media platforms would make it more proactive and useful for catching misinformation as it spreads rather than after the fact.
+
+On the language side the current approach relies on translation before analysis which can introduce small errors. Building multilingual models or using multilingual embeddings that can process different languages directly would be more reliable and remove the dependency on external translation services.
+
+Scalability is also worth addressing. Moving the system to a cloud environment or exposing it as an api would let it handle more users and requests at scale. This would make it suitable for use in media monitoring tools or fact checking platforms.
+Finally adding a user feedback mechanism would help the system improve over time. If users can flag incorrect assessments that data could be used to retrain and refine the models and adapt to new patterns of misinformation as they emerge.
+
+
+
+	•	References
+
+
+
+	•	Shu, K., Sliva, A., Wang, S., Tang, J., & Liu, H. (2017). Fake news detection on social media: A data mining perspective. ACM SIGKDD Explorations Newsletter, 19(1), 22–36. 
+
+	•	Lazer, D. M. J., Baum, M. A., Benkler, Y., et al. (2018). The science of fake news. Science, 359(6380), 1094–1096. 
+
+
+	•	Vosoughi, S., Roy, D., & Aral, S. (2018). The spread of true and false news online. Science, 359(6380), 1146–1151. 
+
+	•	Ahmed, H., Traore, I., & Saad, S. (2017). Detection of online fake news using n-gram analysis and machine learning techniques. International Conference on Intelligent, Secure, and Dependable Systems. 
+
+
+	•	Conroy, N. J., Rubin, V. L., & Chen, Y. (2015). Automatic deception detection: Methods for finding fake news. Proceedings of the Association for Information Science and Technology. 
+
+	•	Zhou, X., & Zafarani, R. (2020). A survey of fake news: Fundamental theories, detection methods, and opportunities. ACM Computing Surveys, 53(5), 1–40. 
+
+
+	•	Rashkin, H., Choi, E., Jang, J. Y., Volkova, S., & Choi, Y. (2017). Truth of varying shades: Analyzing language in fake news. Proceedings of EMNLP. 
+
+	•	Wang, W. Y. (2017). “Liar, liar pants on fire”: A new benchmark dataset for fake news detection. ACL. 
+
+
+	•	Devlin, J., Chang, M. W., Lee, K., & Toutanova, K. (2019). BERT: Pre-training of deep bidirectional transformers for language understanding. NAACL-HLT. 
+
+	•	Khan, J. Y., Khondaker, M. T. I., Islam, M. T., et al. (2020). A benchmark study of machine learning models for online fake news detection. Machine Learning with Applications, 1, 100032. 
+
+
+	•	Kaliyar, R. K., Goswami, A., & Narang, P. (2021). FakeBERT: Fake news detection in social media with a BERT-based deep learning approach. Multimedia Tools and Applications, 80, 11765–11788. 
+
+	•	Zadeh, L. A. (1965). Fuzzy sets. Information and Control, 8(3), 338–353. 
+
+
+	•	Ross, T. J. (2010). Fuzzy Logic with Engineering Applications. Wiley. 
+
+	•	Pedrycz, W., & Gomide, F. (2007). Fuzzy Systems Engineering: Toward Human-Centric Computing. Wiley. 
+
+
+	•	Castillo, C., Mendoza, M., & Poblete, B. (2011). Information credibility on Twitter. Proceedings of WWW. 
+
+	•	Shu, K., Mahudeswaran, D., Wang, S., Lee, D., & Liu, H. (2019). FakeNewsNet: A data repository with news content, social context, and spatiotemporal information. Big Data, 8(3), 171–188. 
+
+
+	•	Zhang, X., Ghorbani, A. A. (2020). An overview of online fake news: Characterization, detection, and discussion. Information Processing & Management, 57(2).
+
+

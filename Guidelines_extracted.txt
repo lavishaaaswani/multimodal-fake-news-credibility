@@ -1,0 +1,34 @@
+Work Project-Final Review Guidelines
+Your Final project report carries 20 marks. So, be careful in preparing it. Be careful about plagiarism. Write in your own words as far as practicable. Submit a hard copy and the soft copy of the report. 
+Minimum of 30 pages
+Letter size:  For contents: 11, for headings: 12, for abstract and references 10. Font: Times new roman/ Calibri (uniformly one type only)
+The Title page should contain:
+	•	VIT logo
+	•	School Name: School of Computer Science Engineering and Information Systems
+	•	Project Review on: Title of the project and date of presentation
+	•	Course Name and subject code: Soft Computing, BITE405L
+	•	By Member names with register numbers, phone no. & email ID of at least one member
+	•	Under the guidance of: Dr. B. K. Tripathy, professor (HAG), SCORE, VIT, Vellore
+Page 2 onwards:
+	•	Abstract
+	•	Aim and Objective
+	•	H/W & S/W requirements
+	•	Literature review
+	•	Gaps identified
+	•	Problem framed
+	•	Solution proposed
+	•	Architecture of the system
+	•	Detailed Description of the modules
+	•	Work Flow diagram
+	•	Language and tools used 
+	•	Procedure of the project (Algorithms used if any)
+	•	Dataset description
+	•	Experimental set up execution
+	•	Result Analysis
+	•	Comparison with existing approaches
+	•	Sample code (Maximum 2 pages) with snap shots wherever necessary
+	•	Conclusions
+	•	Scope for future work
+	•	References (Minimum of 15)
+Note: The figures, tables are to be numbered and labeled. Labels of figures to be at the bottom and those of tables are to be at the top. These figures, tables and references are to be cited inside the contents.
+
